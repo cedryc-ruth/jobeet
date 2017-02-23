@@ -1,0 +1,1 @@
+C:\Users\s08_icc\Desktop\UwAmp\bin\php\php-5.6.18\php.exe %1 %2 %3 %4 %5 %6 %7 %8 %9
