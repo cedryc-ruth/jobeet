@@ -30,6 +30,18 @@ class Category
 
 
     /**
+     * @var array
+     *
+     * @ORM\OneToMany(targetEntity="Job", mappedBy="categoryId")
+     */
+    private $jobs;
+
+    /**
+     * @ORM\OneToMany(targetEntity="CategoryAffiliate", mappedBy="categoryId")
+     */
+    private $category_affiliates;
+    
+    /**
      * Get id
      *
      * @return int

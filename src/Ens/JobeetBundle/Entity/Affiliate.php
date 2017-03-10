@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="affiliate")
  * @ORM\Entity(repositoryClass="Ens\JobeetBundle\Repository\AffiliateRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Affiliate
 {
@@ -55,6 +56,13 @@ class Affiliate
      * @ORM\Column(name="created_at", type="datetime")
      */
     private $createdAt;
+
+    /**
+     * @var array
+     * 
+     * @ORM\OneToMany(targetEntity="CategoryAffiliate", mappedBy="affiliateId")
+    */
+    private $category_affiliates;
 
 
     /**
@@ -187,6 +195,9 @@ class Affiliate
         return $this->isActive;
     }
     
+    /**
+     * @ORM\PrePersist
+     */
     public function setCreatedAtValue()
     {
       $this->created_at = new \DateTime();
