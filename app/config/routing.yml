@@ -1,4 +1,4 @@
-jobeet:
+ens_jobeet:
     resource: "@JobeetBundle/Controller/"
     type:     annotation
     prefix:   /

@@ -61,6 +61,13 @@ class Job
     /**
      * @var string
      *
+     * @ORM\Column(name="position", type="string", length=255, nullable=true)
+     */
+    private $position;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="location", type="string", length=255, nullable=true)
      */
     private $location;
@@ -68,7 +75,7 @@ class Job
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=255, nullable=true)
+     * @ORM\Column(name="description", type="text")
      */
     private $description;
 
@@ -98,7 +105,7 @@ class Job
      *
      * @ORM\Column(name="is_validated", type="boolean")
      */
-    private $isValidated;
+    private $isActivated;
 
     /**
      * @var string
@@ -260,6 +267,27 @@ class Job
     }
 
     /**
+     * Set position
+     *
+     * @param string $position
+     *
+     * @return Job
+     */
+    public function setPosition($position) {
+        $this->position = $position;
+        return $this;
+    }
+
+    /**
+     * Get position
+     *
+     * @return string
+     */
+    public function getPosition() {
+        return $this->position;
+    }
+    
+    /**
      * Set location
      *
      * @param string $location
@@ -380,27 +408,27 @@ class Job
     }
 
     /**
-     * Set isValidated
+     * Set isActivated
      *
-     * @param boolean $isValidated
+     * @param boolean $isActivated
      *
      * @return Job
      */
-    public function setIsValidated($isValidated)
+    public function setIsActivated($isActivated)
     {
-        $this->isValidated = $isValidated;
+        $this->isActivated = $isActivated;
 
         return $this;
     }
 
     /**
-     * Get isValidated
+     * Get isActivated
      *
      * @return bool
      */
-    public function getIsValidated()
+    public function getIsActivated()
     {
-        return $this->isValidated;
+        return $this->isActivated;
     }
 
     /**
