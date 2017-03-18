@@ -9,14 +9,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
 /**
  * Job controller.
  *
- * @Route("/job")
+ * @Route("/")
  */
 class JobController extends Controller
 {
     /**
      * Lists all job entities.
      *
-     * @Route("/", name="ens_job")
+     * @Route("/", name="ens_job_homepage")
      * @Method("GET")
      */
     public function indexAction()
@@ -50,7 +50,7 @@ class JobController extends Controller
             return $this->redirectToRoute('ens_job_show', array('id' => $job->getId()));
         }
 
-        return $this->render('job/new.html.twig', array(
+        return $this->render('JobeetBundle:Job:new.html.twig', array(
             'job' => $job,
             'form' => $form->createView(),
         ));
@@ -59,14 +59,15 @@ class JobController extends Controller
     /**
      * Finds and displays a job entity.
      *
-     * @Route("/{id}", name="ens_job_show")
+     * @Route("/{company}/{location}/{id}/{position}", name="ens_job_show",
+     *          requirements={"id": "\d+"})
      * @Method("GET")
      */
     public function showAction(Job $job)
     {
         $deleteForm = $this->createDeleteForm($job);
 
-        return $this->render('job/show.html.twig', array(
+        return $this->render('JobeetBundle:Job:show.html.twig', array(
             'job' => $job,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -90,7 +91,7 @@ class JobController extends Controller
             return $this->redirectToRoute('ens_job_edit', array('id' => $job->getId()));
         }
 
-        return $this->render('job/edit.html.twig', array(
+        return $this->render('JobeetBundle:Job:edit.html.twig', array(
             'job' => $job,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
