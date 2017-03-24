@@ -10,4 +10,13 @@ namespace Ens\JobeetBundle\Repository;
  */
 class CategoryRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getWithJobs()
+    {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery(
+            'SELECT c FROM JobeetBundle:Category c LEFT JOIN c.jobs j WHERE j.expiresAt > :date'
+        )->setParameter('date', date('Y-m-d H:i:s', time()));
+        
+        return $query->getResult();
+    }
 }

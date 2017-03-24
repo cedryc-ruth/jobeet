@@ -200,7 +200,47 @@ class Affiliate
      */
     public function setCreatedAtValue()
     {
-      $this->created_at = new \DateTime();
+      $this->createdAt = new \DateTime();
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->category_affiliates = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add categoryAffiliate
+     *
+     * @param \Ens\JobeetBundle\Entity\CategoryAffiliate $categoryAffiliate
+     *
+     * @return Affiliate
+     */
+    public function addCategoryAffiliate(\Ens\JobeetBundle\Entity\CategoryAffiliate $categoryAffiliate)
+    {
+        $this->category_affiliates[] = $categoryAffiliate;
+
+        return $this;
+    }
+
+    /**
+     * Remove categoryAffiliate
+     *
+     * @param \Ens\JobeetBundle\Entity\CategoryAffiliate $categoryAffiliate
+     */
+    public function removeCategoryAffiliate(\Ens\JobeetBundle\Entity\CategoryAffiliate $categoryAffiliate)
+    {
+        $this->category_affiliates->removeElement($categoryAffiliate);
+    }
+
+    /**
+     * Get categoryAffiliates
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCategoryAffiliates()
+    {
+        return $this->category_affiliates;
     }
 }
-

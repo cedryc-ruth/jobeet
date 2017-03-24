@@ -96,4 +96,3 @@ class CategoryAffiliate
         return $this->affiliateId;
     }
 }
-

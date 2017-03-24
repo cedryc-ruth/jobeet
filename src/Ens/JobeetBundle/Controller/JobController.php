@@ -9,24 +9,34 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
 /**
  * Job controller.
  *
- * @Route("/")
+ * @Route("/job")
  */
 class JobController extends Controller
 {
     /**
      * Lists all job entities.
      *
-     * @Route("/", name="ens_job_homepage")
+     * @Route("/", name="ens_job_index")
      * @Method("GET")
      */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
 
-        $jobs = $em->getRepository('JobeetBundle:Job')->findAll();
+        $categories = $em->getRepository('JobeetBundle:Category')->getWithJobs();
 
+        foreach($categories as $category)
+        {
+            $category->setActiveJobs(
+                    $em->getRepository('JobeetBundle:Job')->getActiveJobs(
+                            $category->getId(),
+                            $this->container->getParameter('max_jobs_on_homepage')
+                    )
+            );
+        }
+ 
         return $this->render('JobeetBundle:Job:index.html.twig', array(
-            'jobs' => $jobs,
+            'categories' => $categories
         ));
     }
 

@@ -2,4 +2,7 @@ ens_jobeet:
     resource: "@JobeetBundle/Controller/"
     type:     annotation
     prefix:   /
-
+    
+ens_job_homepage:
+    path:      /
+    defaults:  { _controller: JobeetBundle:Job:index }
