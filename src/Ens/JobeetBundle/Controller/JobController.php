@@ -73,8 +73,15 @@ class JobController extends Controller
      *          requirements={"id": "\d+"})
      * @Method("GET")
      */
-    public function showAction(Job $job)
+    public function showAction($id)
     {
+        $em = $this->getDoctrine()->getManager();
+        $job = $em->getRepository('JobeetBundle:Job')->getActiveJob($id);
+        
+        if (!$job) {
+           throw $this->createNotFoundException('No job found for id '.$id);
+        }
+        
         $deleteForm = $this->createDeleteForm($job);
 
         return $this->render('JobeetBundle:Job:show.html.twig', array(

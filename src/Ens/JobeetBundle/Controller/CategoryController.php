@@ -61,11 +61,18 @@ class CategoryController extends Controller
     /**
      * Finds and displays a category entity.
      *
-     * @Route("/{id}", name="category_show")
+     * @Route("/{slug}", name="ens_jobeet_category_show")
      * @Method("GET")
      */
-    public function showAction(Category $category)
+    public function showAction($slug)
     {
+        $em = $this->getDoctrine()->getManager();
+        $category = $em->getRepository('JobeetBundle:Category')->find($slug);
+
+        if (!$category) {
+            throw $this->createNotFoundException('No job found for slug '.$slug);
+        }
+
         $deleteForm = $this->createDeleteForm($category);
 
         return $this->render('JobeetBundle:Category:show.html.twig', array(

@@ -3,6 +3,7 @@
 namespace Ens\JobeetBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Ens\JobeetBundle\Utils\Jobeet;
 
 /**
  * Category
@@ -46,6 +47,8 @@ class Category
      * @var array 
      */
     private $active_jobs;
+    
+    private $more_jobs;
     
     /**
      * Get id
@@ -170,5 +173,20 @@ class Category
     public function getActiveJobs()
     {
         return $this->active_jobs;
+    }
+    
+    public function getSlug()
+    {
+        return Jobeet::slugify($this->getName());
+    }
+
+    public function setMoreJobs($jobs)
+    {
+        $this->more_jobs = $jobs >=  0 ? $jobs : 0;
+    }
+	 
+    public function getMoreJobs()
+    {
+      return $this->more_jobs;
     }
 }
