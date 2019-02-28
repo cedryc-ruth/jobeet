@@ -20,7 +20,7 @@ class Category
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    private $id;	//L'id du Job
 
     /**
      * @var string
